@@ -41,7 +41,7 @@
 
           <form method="get" class="form_filter">
             <div class="form_filter_obj">
-                <select id="subject" name="subject">
+                <select id="subject" name="subject" style="padding-left: 25%;">
                   <option class="opt" selected>предмет</option>
                   {% for sub in subjects %}
                     <option class="opt" value="{{ sub }}">{{ sub }}</option>
@@ -49,10 +49,18 @@
                 </select>
             </div>
             <div class="form_filter_obj">
-                <select id="rank" name="rank">
+                <select id="rank" name="rank" style="padding-left: 27%;">
                   <option class="opt" selected>уровень</option>
                   {% for rank in ranks %}
                     <option class="opt" value="{{ rank }}">{{ rank }}</option>
+                  {% endfor %}
+                </select>
+            </div>
+            <div class="form_filter_obj">
+                <select id="grade" name="grade" style="padding-left: 33%;">
+                  <option class="opt" selected>класс</option>
+                  {% for grade in grades %}
+                    <option class="opt" value="{{ grade }}">{{ grade }}</option>
                   {% endfor %}
                 </select>
             </div>
@@ -70,8 +78,9 @@
                     {% else %}
                       <p class="date"> Регистрация закончится через {{ i.2 }}</p>
                     {% endif %}
-                    {% if i.3 != "н" %}
-                      <p class="rank">{{ i.3 }} уровень</p>
+                    <p class="rank">{{ i.3 }} класс</p>
+                    {% if i.4 != "н" %}
+                      <p class="rank">{{ i.4 }} уровень</p>
                     {% else %}
                       <p class="rank">Олимпиада не имеет уровня</p>
                     {% endif %}

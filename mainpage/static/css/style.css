@@ -348,7 +348,6 @@ select {
 
 select {
   width: 140px !important;
-  padding-left: 50%;
   background: #F3F3F3;
   padding-left: 35px;
   text-align: -webkit-center;
@@ -362,6 +361,7 @@ select {
 
 select .opt {
   width: 140px !important;
+  padding-left: 25%;
   text-align: -webkit-center;
 }
 

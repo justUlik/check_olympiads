@@ -27,10 +27,10 @@ def view_olympiads(request):
     data = []
     olympiads = Olympiad.objects.filter(register_end_date__gte=datetime.date.today()).order_by('register_end_date')
     filter = OlympiadFilter(request.GET, queryset=olympiads)
-    test = Olympiad.objects.only('subject')
     olympiads = filter.qs
     subjects = ['Математика', 'Русский язык', 'Литература', 'История', 'Физическая культура', 'Музыка', 'Технология', 'Химия', 'Биология', 'Физика', 'Экология', 'География', 'Естествознание', 'Астрономия', 'Окружающий мир', 'Изобразительное искусство', 'Основы безопасности жизнедеятельности', 'Информатика', 'Робототехника', 'Экономика']
     ranks = ['1', '2', '3', 'нет']
+    grades = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11']
     for olympiad in olympiads:
         day = olympiad.register_end_date - datetime.date.today()
         day = _plural_days(day.days)
@@ -38,5 +38,6 @@ def view_olympiads(request):
             olympiad.subject,
             olympiad.name,
             day,
+            olympiad.grade,
             olympiad.rank])
-    return render(request, 'mainpage/index.html', {'data': data, 'subjects' : subjects, 'ranks' : ranks})
+    return render(request, 'mainpage/index.html', {'data': data, 'subjects' : subjects, 'ranks' : ranks, 'grades': grades})

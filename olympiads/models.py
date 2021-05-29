@@ -37,6 +37,19 @@ class Olympiad(models.Model):
         ("Робототехника", "Робототехника"),
         ("Экономика", "Экономика"),
     ]
+    CHOICES_GRADES = [
+        ("1", "1"),
+        ("2", "2"),
+        ("3", "3"),
+        ("4", "4"),
+        ("5", "5"),
+        ("6", "6"),
+        ("7", "7"),
+        ("8", "8"),
+        ("9", "9"),
+        ("10", "10"),
+        ("11", "11"),
+    ]
     subject = models.TextField(choices=CHOICES_SUBJECT, max_length=100, blank=True)
     name = models.TextField(max_length=100, blank=True)
     register_end_date = models.DateField(default=None)
@@ -45,6 +58,7 @@ class Olympiad(models.Model):
     rank = models.TextField(choices=CHOICES_RANKS)
     support_email = models.EmailField(default=None)
     address = models.TextField(default=None)
+    grade = models.TextField(choices=CHOICES_GRADES, default=None)
 
 
     def __str__(self):
