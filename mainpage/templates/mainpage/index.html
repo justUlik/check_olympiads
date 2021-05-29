@@ -38,7 +38,11 @@
                   <div class="data">
                     <p class="subject">{{ i.0 }}</p>
                     <p class="name_olympiad"></a>{{ i.1 }}</p>
-                    <p class="date"> Регистрация закончится через {{ i.2 }}</p>
+                    {% if i.2 == "сегодня"%}
+                      <p class="date"> Регистрация закончится {{ i.2 }}</p>
+                    {% else %}
+                      <p class="date"> Регистрация закончится через {{ i.2 }}</p>
+                    {% endif %}
                     {% if i.3 != "н" %}
                       <p class="rank">{{ i.3 }} уровень</p>
                     {% else %}
