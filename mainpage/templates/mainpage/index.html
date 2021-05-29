@@ -15,7 +15,13 @@
       <ul class="header_name">
           <li class="name"><a class="no_wrap" href="/">олимпиады.</a></li>
           {% if user.is_authenticated %}
-            <li class="register"><a href="/autorization/profile" class="rgstr_wrap">@{{ user.username }}</a></li>
+          <li class="register">
+            <div id="registerr">
+              <a class="rgstr_wrap a_p" href="/autorization/profile">@{{ user.username }}</a>
+              <a class="rgstr_wrap a_img" href="/autorization/profile"><h3>@</h3></a>
+            </div>
+          </li>
+            <!--<li class="register"><a href="/autorization/profile" class="rgstr_wrap">@{{ user.username }}</a></li>-->
           {% else %}
             <li class="register">
               <div id="registerr">
@@ -38,7 +44,7 @@
                   <div class="data">
                     <p class="subject">{{ i.0 }}</p>
                     <p class="name_olympiad"></a>{{ i.1 }}</p>
-                    {% if i.2 == "сегодня"%}
+                    {% if i.2 == "сегодня" %}
                       <p class="date"> Регистрация закончится {{ i.2 }}</p>
                     {% else %}
                       <p class="date"> Регистрация закончится через {{ i.2 }}</p>
