@@ -38,6 +38,27 @@
           <p class="topic_main">основное</p>
           <div class="horiz_line">
           </div>
+
+          <form method="get" class="form_filter">
+            <div class="form_filter_obj">
+                <select id="subject" name="subject">
+                  <option class="opt" selected>предмет</option>
+                  {% for sub in subjects %}
+                    <option class="opt" value="{{ sub }}">{{ sub }}</option>
+                  {% endfor %}
+                </select>
+            </div>
+            <div class="form_filter_obj">
+                <select id="rank" name="rank">
+                  <option class="opt" selected>уровень</option>
+                  {% for rank in ranks %}
+                    <option class="opt" value="{{ rank }}">{{ rank }}</option>
+                  {% endfor %}
+                </select>
+            </div>
+            <button type="submit" name="button" class="green_but_filter">поиск</button>
+          </form>
+
           <div class="vetical_table">
               {% for i in data %}
                 <div class="content_table" onclick="location.href='/olympiad/{{ i.1 }}';">

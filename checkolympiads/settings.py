@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'autorization',
     'mainpage',
     'olympiads',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

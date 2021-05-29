@@ -4,6 +4,7 @@ Functions for query processing of mainpage app
 
 from django.shortcuts import render
 from olympiads.models import Olympiad
+from olympiads.filters import OlympiadFilter
 import datetime
 
 def _plural_days(n):
@@ -25,6 +26,11 @@ def view_olympiads(request):
     """
     data = []
     olympiads = Olympiad.objects.filter(register_end_date__gte=datetime.date.today()).order_by('register_end_date')
+    filter = OlympiadFilter(request.GET, queryset=olympiads)
+    test = Olympiad.objects.only('subject')
+    olympiads = filter.qs
+    subjects = ['Математика', 'Русский язык', 'Литература', 'История', 'Физическая культура', 'Музыка', 'Технология', 'Химия', 'Биология', 'Физика', 'Экология', 'География', 'Естествознание', 'Астрономия', 'Окружающий мир', 'Изобразительное искусство', 'Основы безопасности жизнедеятельности', 'Информатика', 'Робототехника', 'Экономика']
+    ranks = ['1', '2', '3', 'нет']
     for olympiad in olympiads:
         day = olympiad.register_end_date - datetime.date.today()
         day = _plural_days(day.days)
@@ -33,4 +39,4 @@ def view_olympiads(request):
             olympiad.name,
             day,
             olympiad.rank])
-    return render(request, 'mainpage/index.html', {'data': data})
+    return render(request, 'mainpage/index.html', {'data': data, 'subjects' : subjects, 'ranks' : ranks})

@@ -324,3 +324,51 @@ a.rgstr_wrap:hover {
   width: 100%;
   height: calc(35px);
 }
+
+select {
+  border:none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -ms-appearance: none;
+}
+
+.form_filter {
+  padding-top: 20px;
+}
+
+.form_filter_obj {
+  display: inline-table;
+  width: 140px;
+  border: 1px solid #6DC2B6;
+  box-sizing: border-box;
+  margin-right: 20px !important;
+  margin-bottom: 10px;
+}
+
+select {
+  width: 140px !important;
+  padding-left: 50%;
+  background: #F3F3F3;
+  padding-left: 35px;
+  text-align: -webkit-center;
+  border:none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -ms-appearance: none;
+  text-decoration: none;
+}
+
+select .opt {
+  width: 140px !important;
+  text-align: -webkit-center;
+}
+
+.green_but_filter {
+  background: #6DC2B6;
+  color: #F3F3F3;
+  box-sizing: border-box;
+  border-style: none;
+  width: 140px;
+}
