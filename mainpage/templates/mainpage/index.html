@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Олимпиады</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+  <body>
+    <div class="header">
+      <p>проверяйте. не пропускайте. участвуйте.</p>
+      <div class="horiz_line">
+      </div>
+      <ul class="header_name">
+          <li class="name"><a class="no_wrap" href="/">олимпиады.</a></li>
+          {% if user.is_authenticated %}
+            <li class="register"><a href="/autorization/profile" class="rgstr_wrap">@{{ user.username }}</a></li>
+          {% else %}
+            <li class="register">
+              <div id="registerr">
+                <a class="rgstr_wrap a_p" href="/autorization/signin"><p>войти/зарегистрироваться</p></a>
+                <a class="rgstr_wrap a_img" href="/autorization/signin"><img class="register" src={% static "media/signin.svg" %} alt="target"></a>
+              </div>
+            </li>
+          {% endif%}
+      </ul>
+      <div class="horiz_line">
+      </div>
+    </div>
+    <div class="main">
+          <p class="topic_main">основное</p>
+          <div class="horiz_line">
+          </div>
+          <div class="vetical_table">
+              {% for i in data %}
+                <div class="content_table" onclick="location.href='/olympiad/{{ i.1 }}';">
+                  <div class="data">
+                    <p class="subject">{{ i.0 }}</p>
+                    <p class="name_olympiad"></a>{{ i.1 }}</p>
+                    <p class="date"> Регистрация закончится через {{ i.2 }}</p>
+                    {% if i.3 != "н" %}
+                      <p class="rank">{{ i.3 }} уровень</p>
+                    {% else %}
+                      <p class="rank">Олимпиада не имеет уровня</p>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endfor %}
+          </div>
+    </div>
+  </body>
+</html>

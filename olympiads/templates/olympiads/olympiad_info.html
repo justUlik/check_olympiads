@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <title>Олимпиада</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+  <div class="header">
+    <p>проверяйте. не пропускайте. участвуйте.</p>
+    <div class="horiz_line">
+    </div>
+    <ul class="header_name">
+        <li class="name">олимпиады.</li>
+        {% if user.is_authenticated %}
+          <li class="register"><a href="/autorization/profile" class="rgstr_wrap">@{{ user.username }}</a></li>
+        {% else %}
+          <li class="register"><a class="rgstr_wrap" href="/autorization/signin">войти/зарегистрироваться</a></li>
+        {% endif%}
+    </ul>
+    <div class="horiz_line">
+    </div>
+  </div>
+  <div class="main">
+    <h1 class="topic_main font_big">{{ name }}</h1>
+    <div class="vetical_table">
+      <div class="horiz_line">
+      </div>
+      {% if description != "" %}
+      <div class="description">
+        <p class="description_title">Об олимпиаде</p>
+        <div class="small_horiz_line">
+        </div>
+        <p class="description_text">
+          {{ description }}
+        </p>
+      </div>
+      {% endif %}
+      <div class="description">
+        <p class="description_title">Информация</p>
+        <div class="small_horiz_line">
+        </div>
+        <div>
+            <img class="data_img_bookshelf" src={% static "media/bookshelf.svg" %} alt="subject">
+            <p class="subject data_p_bookshelf">{{ subject }}</p>
+        </div>
+        <div>
+          <img class="data_img_target" src={% static "media/target.svg" %} alt="target">
+          {% if rank != "нет" %}
+          <p class="subject data_p_target">{{ rank }} уровень</p>
+          {% else %}
+          <p class="subject data_p_target">Олимпиада не имеет уровня</p>
+          {% endif %}
+        </div>
+        <div>
+          <img class="data_img_deadline" src={% static "media/deadline.svg" %} alt="deadline">
+          <p class="date data_p_deadline">Регистрация заканчивается: {{ register_end_date }}</p>
+        </div>
+      </div>
+      <div class="description">
+        <button class="green_but green_but_text" type="button" onclick="location.href='/olympiad/{{ name }}/register_olympiad';"  name="button">Принять участие</button>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

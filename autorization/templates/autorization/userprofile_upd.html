@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="js/bootstrap-datetimepicker.min.js"></script>
+    <title>Олимпиады</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+  <body>
+    <div class="header">
+      <p>проверяйте. не пропускайте. участвуйте.</p>
+      <div class="horiz_line">
+      </div>
+      <ul class="header_name">
+          <li class="name">олимпиады.</li>
+          {% if user.is_authenticated %}
+            <li class="register"><a href="/autorization/profile" class="rgstr_wrap">@{{ user.username }}</a></li>
+          {% else %}
+            <li class="register"><a class="rgstr_wrap" href="/autorization/signin">войти/зарегистрироваться</a></li>
+          {% endif%}
+      </ul>
+      <div class="horiz_line">
+      </div>
+    </div>
+    <div class="main">
+          <p class="topic_main">профиль</p>
+          <div class="horiz_line">
+          </div>
+          <form method="post">
+              {% csrf_token %}
+              <div>
+                <div class="usr">
+                    <p class="usr_eml_plc">никнейм</p>
+                    <h1 class="usr_eml_data">{{ username }}</h1>
+                </div>
+                <div class="eml">
+                    <p class="usr_eml_plc">email</p>
+                    <h1 class="usr_eml_data">{{ email }}</h1>
+                </div>
+              </div>
+              <div style="padding-top: 40px;">
+                <div class="names">
+                  <div class="field">
+                    <p class="field_plc">имя</p>
+                    <input type="id_first_name" id="id_first_name" name="first_name" class="field_box" placeholder="{{ first_name }}"></input>
+                  </div>
+                  <div class="field">
+                    <p class="field_plc">отчество (при наличии)</p>
+                    <input type="id_father_name" id="id_father_name" name="father_name" class="field_box" placeholder="{{ father_name }}"></input>
+                  </div>
+                  <div class="field">
+                    <p class="field_plc">фамилия</p>
+                    <input type="id_second_name" id="id_second_name" name="second_name" class="field_box" placeholder="{{ second_name }}"></input>
+                  </div>
+                </div>
+                <div class="other_data">
+                  <div class="field">
+                    <p class="field_plc">дата рождения</p>
+                    <input type="id_birth_date" id="id_birth_date" name="birth_date" class="field_box" placeholder="{{ birth_date }}"></input>
+                    <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                  </div>
+                  <div class="field">
+                    <p class="field_plc">класс</p>
+                    <input type="id_grade" id="id_grade" name="grade" class="field_box" placeholder="{{ grade }}"></input>
+                  </div>
+                  <div style="padding-top: 15px">
+                    <button class="changing_profile changing_profile_p" type="submit" name="button">изменить</button>
+                  </div>
+              </form>
+            </div>
+          </div>
+    </div>
+  </body>
+</html>
