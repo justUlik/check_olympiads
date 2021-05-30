@@ -15,11 +15,22 @@
     <div class="horiz_line">
     </div>
     <ul class="header_name">
-        <li class="name">олимпиады.</li>
+        <li class="name"><a class="no_wrap" href="/">олимпиады.</a></li>
         {% if user.is_authenticated %}
-          <li class="register"><a href="/autorization/profile" class="rgstr_wrap">@{{ user.username }}</a></li>
+        <li class="register">
+          <div id="registerr">
+            <a class="rgstr_wrap a_p" href="/autorization/profile">@{{ user.username }}</a>
+            <a class="rgstr_wrap a_img" href="/autorization/profile"><h3>@</h3></a>
+          </div>
+        </li>
+          <!--<li class="register"><a href="/autorization/profile" class="rgstr_wrap">@{{ user.username }}</a></li>-->
         {% else %}
-          <li class="register"><a class="rgstr_wrap" href="/autorization/signin">войти/зарегистрироваться</a></li>
+          <li class="register">
+            <div id="registerr">
+              <a class="rgstr_wrap a_p" href="/autorization/signin"><p>войти/зарегистрироваться</p></a>
+              <a class="rgstr_wrap a_img" href="/autorization/signin"><img class="register" src={% static "media/signin.svg" %} alt="target"></a>
+            </div>
+          </li>
         {% endif%}
     </ul>
     <div class="horiz_line">
@@ -30,6 +41,7 @@
     <div class="vetical_table">
       <div class="horiz_line">
       </div>
+
       {% if description != "" %}
       <div class="description">
         <p class="description_title">Об олимпиаде</p>
@@ -40,29 +52,72 @@
         </p>
       </div>
       {% endif %}
+
       <div class="description">
         <p class="description_title">Информация</p>
         <div class="small_horiz_line">
         </div>
         <div>
-            <img class="data_img_bookshelf" src={% static "media/bookshelf.svg" %} alt="subject">
-            <p class="subject data_p_bookshelf">{{ subject }}</p>
+          <div class="names">
+              <div class="item_align">
+                  <img class="data_img bookshelf" src={% static "media/bookshelf.svg" %} alt="subject">
+                  <p class="subject data_p">{{ subject }}</p>
+              </div>
+              <div class="item_align">
+                <img class="data_img deadline" style="padding-left:5px" src={% static "media/deadline.svg" %} alt="deadline">
+                <p class="date data_p" style="padding-left:10px">Регистрация заканчивается {{ register_end_date }}</p>
+              </div>
+              <div class="item_align">
+                <img class="data_img target" src={% static "media/support.svg" %} alt="support">
+                <p class="data_p" style="padding-left: 7px">По всем вопросам: {{ support_email }}</p>
+              </div>
+            </div>
+
+            <div class="other_data" style="padding-left: 80px">
+              <div class="item_align">
+                <img class="data_img target" src={% static "media/target.svg" %} alt="target">
+                {% if rank != "нет" %}
+                <p class="subject data_p" style="padding-left: 7px">{{ rank }} уровень, {{ grade }} класс</p>
+                {% else %}
+                <p class="subject data_p">Олимпиада не имеет уровня</p>
+                {% endif %}
+              </div>
+              <div class="item_align">
+                <img class="data_img target" src={% static "media/calendar.svg" %} alt="calendar">
+                <p class="data_p" style="padding-left: 7px">{{ competition_date }}</p>
+              </div>
+              <div class="item_align">
+                <img class="data_img location" src={% static "media/pin.svg" %} alt="location">
+                <p class="data_p" style="padding-left: 16px">{{ address }}</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-          <img class="data_img_target" src={% static "media/target.svg" %} alt="target">
-          {% if rank != "нет" %}
-          <p class="subject data_p_target">{{ rank }} уровень</p>
-          {% else %}
-          <p class="subject data_p_target">Олимпиада не имеет уровня</p>
-          {% endif %}
-        </div>
-        <div>
-          <img class="data_img_deadline" src={% static "media/deadline.svg" %} alt="deadline">
-          <p class="date data_p_deadline">Регистрация заканчивается: {{ register_end_date }}</p>
-        </div>
-      </div>
-      <div class="description">
-        <button class="green_but green_but_text" type="button" onclick="location.href='/olympiad/{{ name }}/register_olympiad';"  name="button">Принять участие</button>
+      <div class="description" style="padding-top: 5px !important">
+        {% if is_authenticated and is_profile_good %}
+          <button class="green_but green_but_text" type="submit" onclick="location.href='/olympiad/{{ name }}/register_olympiad';"  name="button">Принять участие</button>
+        {% else %}
+          <button class="green_but green_but_text" onclick="pop()">Принять участие</button>
+          <div id="box">
+            <h1>Уппс...</h1>
+            <p>Чтобы принять участие в олимпиаде <br>
+                 необходимо авторизоваться на сайте и <br>
+                заполнить данные о себе в профиле!</p>
+            <button class="changing_profile changing_profile_p" style="float: none !important; width: 55% !important;" onclick="pop()">Понятно.</button>
+          </div>
+          <script type="text/javascript">
+            var pos = 0;
+            function pop() {
+              if (pos == 0) {
+                document.getElementById("box").style.display = "block";
+                pos = 1;
+              } else {
+                document.getElementById("box").style.display = "none";
+                pos = 0;
+              }
+            }
+          </script>
+        {% endif %}
       </div>
     </div>
   </div>
