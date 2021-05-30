@@ -30,6 +30,7 @@
     <div class="vetical_table">
       <div class="horiz_line">
       </div>
+
       {% if description != "" %}
       <div class="description">
         <p class="description_title">Об олимпиаде</p>
@@ -40,25 +41,35 @@
         </p>
       </div>
       {% endif %}
+
       <div class="description">
         <p class="description_title">Информация</p>
         <div class="small_horiz_line">
         </div>
-        <div>
-            <img class="data_img_bookshelf" src={% static "media/bookshelf.svg" %} alt="subject">
-            <p class="subject data_p_bookshelf">{{ subject }}</p>
+        <div class="vertical_align">
+          <div class="bookshelf">
+              <img class="data_img_bookshelf" src={% static "media/bookshelf.svg" %} alt="subject">
+              <h1 class="subject data_p_bookshelf">{{ subject }}</h1>
+          </div>
+          <div class="target">
+            <img class="data_img_target" src={% static "media/target.svg" %} alt="target">
+            {% if rank != "нет" %}
+            <h1 class="subject data_p_target">{{ rank }} уровень</h1>
+            {% else %}
+            <h1 class="subject data_p_target">Олимпиада не имеет уровня</h1>
+            {% endif %}
+          </div>
         </div>
-        <div>
-          <img class="data_img_target" src={% static "media/target.svg" %} alt="target">
-          {% if rank != "нет" %}
-          <p class="subject data_p_target">{{ rank }} уровень</p>
-          {% else %}
-          <p class="subject data_p_target">Олимпиада не имеет уровня</p>
-          {% endif %}
-        </div>
-        <div>
-          <img class="data_img_deadline" src={% static "media/deadline.svg" %} alt="deadline">
-          <p class="date data_p_deadline">Регистрация заканчивается: {{ register_end_date }}</p>
+
+        <div class="vertical_align">
+          <div class="bookshelf" style="width: 45%">
+            <img class="data_img_deadline" src={% static "media/deadline.svg" %} alt="deadline">
+            <p class="date data_p_deadline">Регистрация заканчивается {{ register_end_date }}</p>
+          </div>
+          <div class="target">
+            <img class="data_img_target" src={% static "media/calendar.svg" %} alt="calendar">
+            <p class="data_p_target">{{ competition_date }}</p>
+          </div>
         </div>
       </div>
       <div class="description">

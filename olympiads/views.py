@@ -5,20 +5,36 @@ from django.shortcuts import render
 from .models import Olympiad, registerOlympiad
 from autorization.models import Profile
 from django.contrib.auth.decorators import login_required
+import datetime
+
+def _plural_days(n):
+    days = ['день', 'дня', 'дней']
+    if n == 0:
+        return 'сегодня'
+    if n % 10 == 1 and n % 100 != 11:
+        p = 0
+    elif 2 <= n % 10 <= 4 and (n % 100 < 10 or n % 100 >= 20):
+        p = 1
+    else:
+        p = 2
+    return str(n) + ' ' + days[p]
 
 def check_olympiad_info(request, olympiad_name):
     """
     Rendering html template for showing information about each olympiad
     """
     olympiad = Olympiad.objects.get(name=olympiad_name)
+    day = olympiad.register_end_date - datetime.date.today()
+    day = _plural_days(day.days)
     context = {'name': olympiad.name,
                'subject': olympiad.subject,
                'description' : olympiad.description,
-               'register_end_date': olympiad.register_end_date,
+               'register_end_date': day,
+               'competition_date': olympiad.competition_date,
                'rank': olympiad.rank}
     return render(request, 'olympiads/olympiad_info.html', context=context)
 
-@login_required(login_url='../signin/')
+@login_required(login_url='/signin/')
 def register_to_olympiad(request, olympiad_name):
     olympiad = Olympiad.objects.get(name=olympiad_name)
     usr = request.user
