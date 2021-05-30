@@ -73,6 +73,54 @@
               </form>
             </div>
           </div>
+
+          <p class="topic_main">мои олимпиады</p>
+          <div class="horiz_line">
+          </div>
+          <form method="get" class="form_filter">
+            <div class="form_filter_obj">
+                <select id="subject" name="subject" style="padding-left: 25%;">
+                  <option class="opt" selected>предмет</option>
+                  {% for sub in subjects %}
+                    <option class="opt" value="{{ sub }}">{{ sub }}</option>
+                  {% endfor %}
+                </select>
+            </div>
+            <div class="form_filter_obj">
+                <select id="rank" name="rank" style="padding-left: 27%;">
+                  <option class="opt" selected>уровень</option>
+                  {% for rank in ranks %}
+                    <option class="opt" value="{{ rank }}">{{ rank }}</option>
+                  {% endfor %}
+                </select>
+            </div>
+            <div class="form_filter_obj">
+                <select id="grade" name="grade" style="padding-left: 33%;">
+                  <option class="opt" selected>класс</option>
+                  {% for grade in grades %}
+                    <option class="opt" value="{{ grade }}">{{ grade }}</option>
+                  {% endfor %}
+                </select>
+            </div>
+            <button type="submit" name="button" class="green_but_filter">поиск</button>
+          </form>
+
+          <div class="vetical_table">
+              {% for olympiad in data_olympiads %}
+                <div class="content_table" onclick="location.href='/olympiad/{{ olympiad.name }}';">
+                  <div class="data">
+                    <p class="subject">{{ olympiad.subject }}</p>
+                    <p class="name_olympiad"></a>{{ olympiad.name }}</p>
+                    <p class="date"> Дата проведения: {{ olympiad.competition_date }}</p>
+                    {% if i.4 != "н" %}
+                      <p class="rank">{{ olympiad.rank }} уровень</p>
+                    {% else %}
+                      <p class="rank">Олимпиада не имеет уровня</p>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endfor %}
+          </div>
     </div>
   </body>
 </html>

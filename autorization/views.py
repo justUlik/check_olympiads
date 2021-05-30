@@ -11,6 +11,9 @@ from django.contrib import messages
 from django.db import transaction
 from .models import Profile
 from .forms import ProfileForm
+from olympiads.filters import OlympiadFilter
+from olympiads.models import Olympiad, registerOlympiad
+import datetime
 
 
 def login_view(request):
@@ -69,6 +72,12 @@ def register_view(request):
 @login_required(login_url='../signin/')
 def profile_view(request):
     profile = Profile.objects.get(user=request.user)
+    olympiads = registerOlympiad.objects.filter(usr=request.user)
+    data_olympiads = []
+    for olympiad in olympiads:
+        if olympiad.olympiad.register_end_date >= datetime.date.today() and olympiad.olympiad.competition_date >= datetime.date.today():
+            data_olympiads.append(olympiad.olympiad)
+    print(data_olympiads)
     if request.method == 'POST':
         profile_form = ProfileForm(request.POST, instance=request.user.profile)
         if profile_form.is_valid():
@@ -102,4 +111,5 @@ def profile_view(request):
 							   "father_name": profile.father_name,
 							   "grade": profile.grade,
                                "birth_date": profile.birth_date,
-                               'profile_form': profile_form})
+                               'profile_form': profile_form,
+                               'data_olympiads' : data_olympiads})

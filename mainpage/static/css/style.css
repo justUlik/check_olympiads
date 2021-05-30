@@ -220,6 +220,7 @@ a.no_wrap:hover {
   padding-top: 20px;
   display: inline-block;
   width: 45%;
+  font-size: 100%;
 }
 
 .eml {
@@ -227,6 +228,7 @@ a.no_wrap:hover {
   padding-left: 10px;
   display: inline-block;
   width: 50%;
+  font-size: 100%;
 }
 
 .usr_eml_plc {
