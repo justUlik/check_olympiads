@@ -26,6 +26,13 @@ def check_olympiad_info(request, olympiad_name):
     olympiad = Olympiad.objects.get(name=olympiad_name)
     day = olympiad.register_end_date - datetime.date.today()
     day = _plural_days(day.days)
+    is_registered = False
+    try:
+        res = registerOlympiad.objects.filter(olympiad=olympiad).filter(usr=request.user)
+        if len(res) != 0:
+            is_registered = True
+    except:
+        is_registered = False
     is_profile_good = False
     is_authenticated = False
     if request.user.is_authenticated:
@@ -45,27 +52,21 @@ def check_olympiad_info(request, olympiad_name):
                'grade': olympiad.grade,
                'is_authenticated' : is_authenticated,
                'is_profile_good' : is_profile_good}
-    return render(request, 'olympiads/olympiad_info.html', context=context)
+    if is_registered:
+        return render(request, 'olympiads/success_register.html', context=context)
+    else:
+        return render(request, 'olympiads/olympiad_info.html', context=context)
 
 @login_required(login_url='autorization/signin/')
 def register_to_olympiad(request, olympiad_name):
     olympiad = Olympiad.objects.get(name=olympiad_name)
     usr = request.user
     profile = Profile.objects.get(user=usr)
-    try:
-        register_to = registerOlympiad(olympiad=olympiad, usr=usr, usr_profile=profile)
-        register_to.save()
-        return render(request, "olympiads/success_register.html", context={'name': olympiad.name,
+    register_to = registerOlympiad(olympiad=olympiad, usr=usr, usr_profile=profile)
+    register_to.save()
+    return render(request, "olympiads/success_register.html", context={'name': olympiad.name,
                       'subject': olympiad.subject,
                       'description' : olympiad.description,
                       'register_end_date': olympiad.register_end_date,
                       'rank': olympiad.rank,
                       'competition_date': olympiad.competition_date})
-    except:
-        return render(request, "olympiads/failed_register.html", context={'name': olympiad.name,
-                      'subject': olympiad.subject,
-                      'description' : olympiad.description,
-                      'register_end_date': olympiad.register_end_date,
-                      'rank': olympiad.rank,
-                      'competition_date': olympiad.competition_date,
-                      'address': olympiad.address})

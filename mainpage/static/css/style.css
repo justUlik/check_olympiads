@@ -395,3 +395,16 @@ select .opt {
   text-align: center;
   display: none;
 }
+
+.is_registered_true {
+  padding-top: 10px;
+  padding-bottom: 0;
+  background: #6DC2B6;
+  border-radius: 5px;
+}
+
+.is_registered_true_p {
+  font-weight: 600;
+  padding-left: 10px;
+  color: #F3F3F3;
+}
