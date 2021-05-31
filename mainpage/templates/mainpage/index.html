@@ -38,36 +38,41 @@
           <p class="topic_main">основное</p>
           <div class="horiz_line">
           </div>
-
-          <form method="get" class="form_filter">
-            <div class="form_filter_obj">
-                <select id="subject" name="subject" style="padding-left: 25%;">
-                  <option class="opt" selected>предмет</option>
-                  {% for sub in subjects %}
-                    <option class="opt" value="{{ sub }}">{{ sub }}</option>
-                  {% endfor %}
-                </select>
-            </div>
-            <div class="form_filter_obj">
-                <select id="rank" name="rank" style="padding-left: 27%;">
-                  <option class="opt" selected>уровень</option>
-                  {% for rank in ranks %}
-                    <option class="opt" value="{{ rank }}">{{ rank }}</option>
-                  {% endfor %}
-                </select>
-            </div>
-            <div class="form_filter_obj">
-                <select id="grade" name="grade" style="padding-left: 33%;">
-                  <option class="opt" selected>класс</option>
-                  {% for grade in grades %}
-                    <option class="opt" value="{{ grade }}">{{ grade }}</option>
-                  {% endfor %}
-                </select>
-            </div>
-            <button type="submit" name="button" class="green_but_filter">поиск</button>
-          </form>
-
+          {% if len != 0 %}
+            <form method="get" class="form_filter">
+              <div class="form_filter_obj">
+                  <select id="subject" name="subject" style="padding-left: 25%;">
+                    <option class="opt" selected>предмет</option>
+                    {% for sub in subjects %}
+                      <option class="opt" value="{{ sub }}">{{ sub }}</option>
+                    {% endfor %}
+                  </select>
+              </div>
+              <div class="form_filter_obj">
+                  <select id="rank" name="rank" style="padding-left: 27%;">
+                    <option class="opt" selected>уровень</option>
+                    {% for rank in ranks %}
+                      <option class="opt" value="{{ rank }}">{{ rank }}</option>
+                    {% endfor %}
+                  </select>
+              </div>
+              <div class="form_filter_obj">
+                  <select id="grade" name="grade" style="padding-left: 33%;">
+                    <option class="opt" selected>класс</option>
+                    {% for grade in grades %}
+                      <option class="opt" value="{{ grade }}">{{ grade }}</option>
+                    {% endfor %}
+                  </select>
+              </div>
+              <button type="submit" name="button" class="green_but_filter">поиск</button>
+            </form>
+          {% endif %}
           <div class="vetical_table">
+            {% if len == 0 %}
+              <div class="content_table">
+                <p class="name_olympiad" style="padding: 20px">Пока новых олимпиад нет :(</p>
+              </div>
+            {% endif %}
               {% for i in data %}
                 <div class="content_table" onclick="location.href='/olympiad/{{ i.1 }}';">
                   <div class="data">

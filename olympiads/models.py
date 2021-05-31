@@ -68,9 +68,10 @@ class registerOlympiad(models.Model):
     """
     Descriptioning fields of registerOlympiad model
     """
-    olympiad = models.OneToOneField(Olympiad, on_delete=models.CASCADE, related_name='register_Olympiad', default=None)
-    usr = models.OneToOneField(User, on_delete=models.CASCADE, related_name='participant')
-    usr_profile = models.OneToOneField(Profile, on_delete=models.CASCADE, related_name='participant_profile')
+    olympiad = models.ForeignKey(Olympiad, on_delete=models.CASCADE, related_name='register_Olympiad', default=None)
+    usr = models.ForeignKey(User, on_delete=models.CASCADE, related_name='participant', default=None)
+    #usr = models.ManyToManyField(User, related_name='participant')
+    usr_profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='participant_profile')
 
     def __str__(self):
         return str(self.olympiad.name) + ", участник: " + str(self.usr_profile.second_name) + str(self.usr_profile.first_name)[0] + str(self.usr_profile.father_name)[0]

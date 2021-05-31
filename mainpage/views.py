@@ -3,7 +3,7 @@ Functions for query processing of mainpage app
 """
 
 from django.shortcuts import render
-from olympiads.models import Olympiad
+from olympiads.models import Olympiad, registerOlympiad
 from olympiads.filters import OlympiadFilter
 import datetime
 
@@ -28,6 +28,14 @@ def view_olympiads(request):
     olympiads = Olympiad.objects.filter(register_end_date__gte=datetime.date.today()).order_by('register_end_date')
     filter = OlympiadFilter(request.GET, queryset=olympiads)
     olympiads = filter.qs
+    if request.user.is_authenticated:
+        res = []
+        registered_olympiads = registerOlympiad.objects.filter(usr=request.user)
+        for olympiad in olympiads:
+            now = registerOlympiad.objects.filter(olympiad=olympiad)
+            if now is []:
+                res.append(olympiad)
+        olympiads = res
     subjects = ['Математика', 'Русский язык', 'Литература', 'История', 'Физическая культура', 'Музыка', 'Технология', 'Химия', 'Биология', 'Физика', 'Экология', 'География', 'Естествознание', 'Астрономия', 'Окружающий мир', 'Изобразительное искусство', 'Основы безопасности жизнедеятельности', 'Информатика', 'Робототехника', 'Экономика']
     ranks = ['1', '2', '3', 'нет']
     grades = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11']
@@ -40,4 +48,4 @@ def view_olympiads(request):
             day,
             olympiad.grade,
             olympiad.rank])
-    return render(request, 'mainpage/index.html', {'data': data, 'subjects' : subjects, 'ranks' : ranks, 'grades': grades})
+    return render(request, 'mainpage/index.html', {'data': data, 'subjects' : subjects, 'ranks' : ranks, 'grades': grades, 'len': len(data)})

@@ -75,8 +75,8 @@
           </div>
 
           <p class="topic_main">мои олимпиады</p>
-          <div class="horiz_line">
-          </div>
+          {% if len != 0 %}
+          <div class="horiz_line"></div>
           <form method="get" class="form_filter">
             <div class="form_filter_obj">
                 <select id="subject" name="subject" style="padding-left: 25%;">
@@ -104,7 +104,13 @@
             </div>
             <button type="submit" name="button" class="green_but_filter">поиск</button>
           </form>
-
+          {% endif %}
+          {% if len == 0 %}
+          <div class="horiz_line" style="margin-bottom: 20px;"></div>
+            <div class="content_table">
+              <p class="name_olympiad" style="padding: 20px">Пока Вы не зарегистрировались ни на одну олимпиаду :(</p>
+            </div>
+          {% endif %}
           <div class="vetical_table">
               {% for olympiad in data_olympiads %}
                 <div class="content_table" onclick="location.href='/olympiad/{{ olympiad.name }}';">

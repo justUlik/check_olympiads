@@ -112,4 +112,5 @@ def profile_view(request):
 							   "grade": profile.grade,
                                "birth_date": profile.birth_date,
                                'profile_form': profile_form,
-                               'data_olympiads' : data_olympiads})
+                               'data_olympiads' : data_olympiads,
+                               'len': len(data_olympiads)})
