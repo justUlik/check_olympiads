@@ -68,10 +68,21 @@ class registerOlympiad(models.Model):
     """
     Descriptioning fields of registerOlympiad model
     """
+    CHOICES_WON = [
+        ("Победитель", "Победитель"),
+        ("Абсолютный победитель", "Абсолютный победитель"),
+        ("Диплом 1 степени", "Диплом 1 степени"),
+        ("Диплом 2 степени", "Диплом 2 степени"),
+        ("Диплом 3 степени", "Диплом 3 степени"),
+        ("Призер", "Призер"),
+        ("Участник", "Участник"),
+        ("Не определен", "Не определен")
+    ]
     olympiad = models.ForeignKey(Olympiad, on_delete=models.CASCADE, related_name='register_Olympiad', default=None)
     usr = models.ForeignKey(User, on_delete=models.CASCADE, related_name='participant', default=None)
     #usr = models.ManyToManyField(User, related_name='participant')
     usr_profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='participant_profile')
+    type_success = models.TextField(choices=CHOICES_WON, default=("Не определен", "Не определен"))
 
     def __str__(self):
         return str(self.olympiad.name) + ", участник: " + str(self.usr_profile.second_name) + str(self.usr_profile.first_name)[0] + str(self.usr_profile.father_name)[0]
