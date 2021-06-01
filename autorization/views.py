@@ -77,7 +77,6 @@ def profile_view(request):
     for olympiad in olympiads:
         if olympiad.olympiad.register_end_date >= datetime.date.today() and olympiad.olympiad.competition_date >= datetime.date.today():
             data_olympiads.append(olympiad.olympiad)
-    print(data_olympiads)
     if request.method == 'POST':
         profile_form = ProfileForm(request.POST, instance=request.user.profile)
         if profile_form.is_valid():
@@ -98,7 +97,7 @@ def profile_view(request):
                 profile.save(update_fields=["birth_date"])
             messages.success(
                 request, ('Профиль успешно обновлен'))
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/autorization/profile/')
         else:
             messages.error(request, ('Были введены данные в некорректном формате'))
     else:

@@ -58,10 +58,11 @@
                 <div class="other_data">
                   <div class="field">
                     <p class="field_plc">дата рождения</p>
-                    <input type="id_birth_date" id="id_birth_date" name="birth_date" class="field_box" placeholder="{{ birth_date }}"></input>
-                    <span class="input-group-addon">
-                      <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
+                    {% if birth_date != None %}
+                      <input type="date" id="id_birth_date" name="birth_date" class="field_box" placeholder="{{ birth_date }}" min="1900-01-01" max="3000-12-31"></input>
+                    {% else %}
+                      <input type="date" id="id_birth_date" name="birth_date" class="field_box" placeholder="дд.мм.гггг"></input>
+                    {% endif %}
                   </div>
                   <div class="field">
                     <p class="field_plc">класс</p>
