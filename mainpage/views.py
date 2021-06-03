@@ -47,4 +47,7 @@ def view_olympiads(request):
             day,
             olympiad.grade,
             olympiad.rank])
-    return render(request, 'mainpage/index.html', {'data': data, 'subjects' : subjects, 'ranks' : ranks, 'grades': grades, 'len': len(data)})
+    if request.user_agent.is_mobile:
+        return render(request, 'mainpage/mobile/index.html', {'data': data, 'subjects' : subjects, 'ranks' : ranks, 'grades': grades, 'len': len(data)})
+    else:
+        return render(request, 'mainpage/index.html', {'data': data, 'subjects' : subjects, 'ranks' : ranks, 'grades': grades, 'len': len(data)})    

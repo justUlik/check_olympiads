@@ -8,14 +8,27 @@ body {
   text-align: center;
 }
 
+.header_title {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20%;
+  font-size: 35px;
+  text-align: center;
+  width: 100%;
+}
+
 .horiz_line {
   background: #43433F;
   height: 2px;
 }
 
+.horiz_line_mob {
+  background: #43433F;
+  height: 3.5px;
+}
+
 .header_name {
   position: relative;
-  overflow: hidden;
   white-space: nowrap;
 }
 
@@ -25,6 +38,14 @@ body {
   font-style: normal;
   font-weight: 800;
   font-size: 45px;
+}
+
+.name_mob {
+  display: inline-block;
+  overflow: hidden;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 80px;
 }
 
 .register {
@@ -61,11 +82,25 @@ body {
   margin-right: 15%;
 }
 
+.main_mob {
+  display: grid;
+  margin-top: 70px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
 .topic_main {
   float: left;
   font-style: normal;
   font-weight: 700;
   font-size: 25px;
+}
+
+.topic_main_mob {
+  float: left;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 45px;
 }
 
 .vetical_table {
@@ -82,6 +117,13 @@ body {
   box-sizing: border-box;
 }
 
+.content_table_mob {
+  margin-bottom: 43px;
+  background: #F3F3F3;
+  border: 2px solid #B5B5B1;
+  box-sizing: border-box;
+}
+
 .data {
   margin: 20px;
 }
@@ -94,10 +136,23 @@ body {
   color: #1835DA;
 }
 
+.subject_mob {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+
+  color: #1835DA;
+}
+
 .name_olympiad {
   margin-top: 10px;
   font-weight: 650;
   font-size: 20px;
+}
+
+.name_olympiad_mob {
+  font-weight: 650;
+  font-size: 50px;
 }
 
 .date {
@@ -108,11 +163,27 @@ body {
   color: #D84947;
 }
 
+.date_mob {
+  font-style: normal;
+  font-weight: 550;
+  font-size: 30px;
+
+  color: #D84947;
+}
+
 .rank {
   font-style: normal;
   font-weight: normal;
   font-size: 650;
 
+  color: #1835DA;
+}
+
+.rank_mob {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30px;
+  font-weight: 450;
   color: #1835DA;
 }
 
@@ -351,10 +422,21 @@ select {
   margin-bottom: 10px;
 }
 
+.form_filter_obj_mob {
+  display: inline-table;
+  width: 140px;
+  height: 50px;
+  border: 2px solid #6DC2B6;
+  box-sizing: border-box;
+  margin-right: 20px !important;
+  margin-bottom: 10px;
+}
+
 select {
   width: 140px !important;
   background: #F3F3F3;
   padding-left: 35px;
+  font-size: 25px;
   text-align: -webkit-center;
   border:none;
   -webkit-appearance: none;
@@ -367,15 +449,19 @@ select {
 select .opt {
   width: 140px !important;
   padding-left: 25%;
+  font-size: 30px;
   text-align: -webkit-center;
 }
 
 .green_but_filter {
   background: #6DC2B6;
   color: #F3F3F3;
+  font-size: 25px;
+  font-weight: 500;
   box-sizing: border-box;
   border-style: none;
   width: 140px;
+  height: 55px;
 }
 
 #box {

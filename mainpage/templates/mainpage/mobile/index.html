@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="js/bootstrap-datetimepicker.min.js"></script>
+    <title>Олимпиады</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+  <body>
+    <div class="header">
+      <p class="header_title">проверяйте. <br> не пропускайте. <br> участвуйте.</p>
+      <div class="horiz_line_mob">
+      </div>
+      <ul class="header_name">
+          <li class="name_mob"><a class="no_wrap" href="/">олимпиады.</a></li>
+          {% if user.is_authenticated %}
+          <li class="register">
+            <div id="registerr">
+              <a class="rgstr_wrap" href="/autorization/profile"><h3>@</h3></a>
+            </div>
+          </li>
+            <!--<li class="register"><a href="/autorization/profile" class="rgstr_wrap">@{{ user.username }}</a></li>-->
+          {% else %}
+            <li class="register">
+              <div id="registerr">
+                <a class="rgstr_wrap" href="/autorization/signin"><img class="register" style="width: 70px; height: 70px; padding-bottom: 20px" src={% static "media/signin.svg" %} alt="target"></a>
+              </div>
+            </li>
+          {% endif%}
+      </ul>
+      <div class="horiz_line_mob">
+      </div>
+    </div>
+
+    <div class="main_mob">
+          <p class="topic_main_mob">основное</p>
+          <div class="horiz_line_mob">
+          </div>
+          {% if len != 0 %}
+            <form method="get" class="form_filter">
+              <div class="form_filter_obj_mob">
+                  <select id="subject" name="subject" style="padding: 5%; padding-left: 15% !important;">
+                    <option class="opt" selected>предмет</option>
+                    {% for sub in subjects %}
+                      <option class="opt" value="{{ sub }}">{{ sub }}</option>
+                    {% endfor %}
+                  </select>
+              </div>
+              <div class="form_filter_obj_mob">
+                  <select id="rank" name="rank" style="padding: 5%; padding-left: 17% !important;">
+                    <option class="opt" selected>уровень</option>
+                    {% for rank in ranks %}
+                      <option class="opt" value="{{ rank }}">{{ rank }}</option>
+                    {% endfor %}
+                  </select>
+              </div>
+              <div class="form_filter_obj_mob">
+                  <select id="grade" name="grade" style="padding: 5%; padding-left: 25% !important;">
+                    <option class="opt" selected>класс</option>
+                    {% for grade in grades %}
+                      <option class="opt" value="{{ grade }}">{{ grade }}</option>
+                    {% endfor %}
+                  </select>
+              </div>
+              <button type="submit" name="button" class="green_but_filter">поиск</button>
+            </form>
+          {% endif %}
+          <div class="vetical_table">
+            {% if len == 0 %}
+              <div class="content_table_mob">
+                <p class="name_olympiad_mob" style="padding: 20px">Пока новых олимпиад нет :(</p>
+              </div>
+            {% endif %}
+              {% for i in data %}
+                <div class="content_table_mob" onclick="location.href='/olympiad/{{ i.1 }}';">
+                  <div class="data">
+                    <p class="subject_mob">{{ i.0 }}</p>
+                    <p class="name_olympiad_mob"></a>{{ i.1 }}</p>
+                    {% if i.2 == "сегодня" %}
+                      <p class="date_mob"> Регистрация закончится {{ i.2 }}</p>
+                    {% else %}
+                      <p class="date_mob"> Регистрация закончится через {{ i.2 }}</p>
+                    {% endif %}
+                    {% if i.4 != "н" %}
+                      <p class="rank_mob">{{ i.4 }} уровень, {{ i.3 }} класс</p>
+                    {% else %}
+                      <p class="rank_mob">Олимпиада не имеет уровняб, {{ i.3 }} класс</p>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endfor %}
+          </div>
+    </div>
+  </body>
+</html>

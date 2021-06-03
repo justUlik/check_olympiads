@@ -25,7 +25,7 @@ SECRET_KEY = 'iydk@&mua1l_3gai+r7rilpl!i!tt^&7a_n&-t1yl+iq(n_-4@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['172.20.10.2', 'localhost', '127.0.0.1', '172.28.42.124', '172.28.43.255']
+ALLOWED_HOSTS = ['172.20.10.2', 'localhost', '127.0.0.1', '172.28.42.124', '172.28.43.255', '192.168.0.116']
 
 
 # Application definition
@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_user_agents.middleware.UserAgentMiddleware',
 ]
 
 ROOT_URLCONF = 'checkolympiads.urls'

@@ -16,9 +16,20 @@
       <ul class="header_name">
           <li class="name"><a class="no_wrap" href="/">олимпиады.</a></li>
           {% if user.is_authenticated %}
-            <li class="register"><a href="/autorization/profile" class="rgstr_wrap">@{{ user.username }}</a></li>
+          <li class="register">
+            <div id="registerr">
+              <a class="rgstr_wrap a_p" href="/autorization/profile">@{{ user.username }}</a>
+              <a class="rgstr_wrap a_img" href="/autorization/profile"><h3>@</h3></a>
+            </div>
+          </li>
+            <!--<li class="register"><a href="/autorization/profile" class="rgstr_wrap">@{{ user.username }}</a></li>-->
           {% else %}
-            <li class="register"><a class="rgstr_wrap" href="/autorization/signin">войти/зарегистрироваться</a></li>
+            <li class="register">
+              <div id="registerr">
+                <a class="rgstr_wrap a_p" href="/autorization/signin"><p>войти/зарегистрироваться</p></a>
+                <a class="rgstr_wrap a_img" href="/autorization/signin"><img class="register" src={% static "media/signin.svg" %} alt="target"></a>
+              </div>
+            </li>
           {% endif%}
       </ul>
       <div class="horiz_line">
