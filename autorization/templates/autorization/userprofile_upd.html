@@ -32,9 +32,9 @@
       <img id="hid" src={% static "media/hidden.png" %} onclick="showhide_profile()" style="padding-left: 10px; padding-top: 5px; display: inline-table" alt="glass_hidden">
       <img id="nonhid" src={% static "media/nonhidden.png" %} onclick="showhide_profile()" style="padding-left: 10px; padding-top: 5px; display: none; width: 40px; height: 35px" alt="glass_non_hidden">
     </div>
+    <div class="horiz_line">
+    </div>
     <div id="profile">
-      <div class="horiz_line">
-      </div>
       <form method="post">
         {% csrf_token %}
         <div>
