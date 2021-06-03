@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'mainpage',
     'olympiads',
     'django_filters',
+    'chartjs',
 ]
 
 MIDDLEWARE = [
