@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <title>Олимпиада</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+  <div class="header">
+    <p class="header_title">проверяйте. <br> не пропускайте. <br> участвуйте.</p>
+    <div class="horiz_line_mob">
+    </div>
+    <ul class="header_name">
+        <li class="name_mob"><a class="no_wrap" href="/">олимпиады.</a></li>
+        {% if user.is_authenticated %}
+        <li class="register">
+          <div id="registerr">
+            <a class="rgstr_wrap a_img" href="/autorization/profile"><h3>@</h3></a>
+          </div>
+        </li>
+          <!--<li class="register"><a href="/autorization/profile" class="rgstr_wrap">@{{ user.username }}</a></li>-->
+        {% else %}
+          <li class="register">
+            <div id="registerr">
+              <a class="rgstr_wrap" href="/autorization/signin"><img class="register" style="width: 70px; height: 70px; padding-bottom: 20px" src={% static "media/signin.svg" %} alt="target"></a>
+            </div>
+          </li>
+        {% endif%}
+    </ul>
+    <div class="horiz_line_mob">
+    </div>
+  </div>
+  <div class="main_mob">
+    <h1 class="topic_main_mob font_big">{{ name }}</h1>
+    <div class="vetical_table">
+      <div class="horiz_line_mob">
+      </div>
+
+      {% if description != "" %}
+      <div class="description">
+        <p class="description_title_mob">Об олимпиаде</p>
+        <div class="small_horiz_line_mob">
+        </div>
+        <p class="description_text_mob">
+          {{ description }}
+        </p>
+      </div>
+      {% endif %}
+
+      <div class="description">
+        <p class="description_title_mob">Информация</p>
+        <div class="small_horiz_line_mob">
+        </div>
+        <div>
+              <div class="item_align_mob">
+                  <img class="data_img bookshelf_mob" src={% static "media/bookshelf.svg" %} alt="subject">
+                  <p class="subject_mob data_p">{{ subject }}</p>
+              </div>
+
+              <div class="item_align_mob">
+                <img class="data_img target_mob" src={% static "media/target.svg" %} alt="target">
+                {% if rank != "нет" %}
+                <p class="subject_mob data_p" style="padding-left: 7px">{{ rank }} уровень, {{ grade }} класс</p>
+                {% else %}
+                <p class="subject_mob data_p">Олимпиада не имеет уровня</p>
+                {% endif %}
+              </div>
+
+              <div class="item_align_mob">
+                <img class="data_img deadline_mob" style="padding-left:5px" src={% static "media/deadline.svg" %} alt="deadline">
+                <p class="date_mob data_p" style="padding-left:16px">Регистрация заканчивается {{ register_end_date }}</p>
+              </div>
+
+              <div class="item_align_mob">
+                <img class="data_img target_mob" src={% static "media/calendar.svg" %} alt="calendar">
+                <p class="data_p" style="padding-left: 4px; font-size: 30px">{{ competition_date }}</p>
+              </div>
+
+              <div class="item_align_mob">
+                <img class="data_img location_mob" src={% static "media/pin.svg" %} alt="location">
+                <p class="data_p" style="padding-left: 16px; font-size: 30px">{{ address }}</p>
+              </div>
+
+              <div class="item_align_mob">
+                <img class="data_img target_mob" src={% static "media/support.svg" %} alt="support">
+                <p class="data_p" style="font-size: 30px">По всем вопросам: {{ support_email }}</p>
+              </div>
+          </div>
+        </div>
+      <div class="description" style="padding-top: 5px !important">
+        {% if is_authenticated and is_profile_good %}
+          <button class="green_but_mob green_but_text" type="submit" onclick="location.href='/olympiad/{{ name }}/register_olympiad';"  name="button">Принять участие</button>
+        {% else %}
+          <button class="green_but_mob green_but_text" onclick="pop()">Принять участие</button>
+          <div id="box">
+            <h1>Уппс...</h1>
+            <p>Чтобы принять участие в олимпиаде <br>
+                 необходимо авторизоваться на сайте и <br>
+                заполнить данные о себе в профиле!</p>
+            <button class="changing_profile changing_profile_p" style="float: none !important; width: 55% !important;" onclick="pop()">Понятно.</button>
+          </div>
+          <script type="text/javascript">
+            var pos = 0;
+            function pop() {
+              if (pos == 0) {
+                document.getElementById("box").style.display = "block";
+                pos = 1;
+              } else {
+                document.getElementById("box").style.display = "none";
+                pos = 0;
+              }
+            }
+          </script>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

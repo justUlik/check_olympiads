@@ -53,9 +53,15 @@ def check_olympiad_info(request, olympiad_name):
                'is_authenticated' : is_authenticated,
                'is_profile_good' : is_profile_good}
     if is_registered:
-        return render(request, 'olympiads/success_register.html', context=context)
+        if request.user_agent.is_mobile:
+            return render(request, 'olympiads/mobile/success_register.html', context=context)
+        else:
+            return render(request, 'olympiads/success_register.html', context=context)
     else:
-        return render(request, 'olympiads/olympiad_info.html', context=context)
+        if request.user_agent.is_mobile:
+            return render(request, 'olympiads/mobile/olympiad_info.html', context=context)
+        else:
+            return render(request, 'olympiads/olympiad_info.html', context=context)
 
 @login_required(login_url='autorization/signin/')
 def register_to_olympiad(request, olympiad_name):

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <title>Олимпиада</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+  <div class="header">
+    <p>проверяйте. не пропускайте. участвуйте.</p>
+    <div class="horiz_line">
+    </div>
+    <ul class="header_name">
+        <li class="name"><a class="no_wrap" href="/">олимпиады.</a></li>
+        {% if user.is_authenticated %}
+        <li class="register">
+          <div id="registerr">
+            <a class="rgstr_wrap a_p" href="/autorization/profile">@{{ user.username }}</a>
+            <a class="rgstr_wrap a_img" href="/autorization/profile"><h3>@</h3></a>
+          </div>
+        </li>
+          <!--<li class="register"><a href="/autorization/profile" class="rgstr_wrap">@{{ user.username }}</a></li>-->
+        {% else %}
+          <li class="register">
+            <div id="registerr">
+              <a class="rgstr_wrap a_p" href="/autorization/signin"><p>войти/зарегистрироваться</p></a>
+              <a class="rgstr_wrap a_img" href="/autorization/signin"><img class="register" src={% static "media/signin.svg" %} alt="target"></a>
+            </div>
+          </li>
+        {% endif%}
+    </ul>
+    <div class="horiz_line">
+    </div>
+  </div>
+  <div class="main">
+    <h1 class="topic_main font_big">{{ name }}</h1>
+    <div class="vetical_table">
+      <div class="horiz_line" style="margin-bottom: 20px !important;">
+      </div>
+
+      <span class="is_registered_true">
+        <p class="is_registered_true">Вы уже зарегистрированы на эту олимпиаду!</p>
+      </span>
+
+      {% if description != "" %}
+      <div class="description">
+        <p class="description_title">Об олимпиаде</p>
+        <div class="small_horiz_line">
+        </div>
+        <p class="description_text">
+          {{ description }}
+        </p>
+      </div>
+      {% endif %}
+
+      <div class="description">
+        <p class="description_title">Информация</p>
+        <div class="small_horiz_line">
+        </div>
+        <div>
+          <div class="names">
+              <div class="item_align">
+                  <img class="data_img bookshelf" src={% static "media/bookshelf.svg" %} alt="subject">
+                  <p class="subject data_p">{{ subject }}</p>
+              </div>
+              <div class="item_align">
+                <img class="data_img deadline" style="padding-left:5px" src={% static "media/deadline.svg" %} alt="deadline">
+                <p class="date data_p" style="padding-left:10px">Регистрация заканчивается {{ register_end_date }}</p>
+              </div>
+              <div class="item_align">
+                <img class="data_img target" src={% static "media/support.svg" %} alt="support">
+                <p class="data_p" style="padding-left: 7px">По всем вопросам: {{ support_email }}</p>
+              </div>
+            </div>
+
+            <div class="other_data" style="padding-left: 80px">
+              <div class="item_align">
+                <img class="data_img target" src={% static "media/target.svg" %} alt="target">
+                {% if rank != "нет" %}
+                <p class="subject data_p" style="padding-left: 7px">{{ rank }} уровень, {{ grade }} класс</p>
+                {% else %}
+                <p class="subject data_p">Олимпиада не имеет уровня</p>
+                {% endif %}
+              </div>
+              <div class="item_align">
+                <img class="data_img target" src={% static "media/calendar.svg" %} alt="calendar">
+                <p class="data_p" style="padding-left: 7px">{{ competition_date }}</p>
+              </div>
+              <div class="item_align">
+                <img class="data_img location" src={% static "media/pin.svg" %} alt="location">
+                <p class="data_p" style="padding-left: 16px">{{ address }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</body>
+
+</html>
