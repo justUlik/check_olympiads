@@ -93,9 +93,9 @@
         </div>
       <div class="description" style="padding-top: 5px !important">
         {% if is_authenticated and is_profile_good %}
-          <button class="green_but_mob green_but_text" type="submit" onclick="location.href='/olympiad/{{ name }}/register_olympiad';"  name="button">Принять участие</button>
+          <button class="green_but_mob green_but_text_mob" type="submit" onclick="location.href='/olympiad/{{ name }}/register_olympiad';"  name="button">Принять участие</button>
         {% else %}
-          <button class="green_but_mob green_but_text" onclick="pop()">Принять участие</button>
+          <button class="green_but_mob green_but_text_mob" onclick="pop()">Принять участие</button>
           <div id="box">
             <h1>Уппс...</h1>
             <p>Чтобы принять участие в олимпиаде <br>

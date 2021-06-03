@@ -11,15 +11,14 @@
 
 <body>
   <div class="header">
-    <p>проверяйте. не пропускайте. участвуйте.</p>
-    <div class="horiz_line">
+    <p class="header_title">проверяйте. <br> не пропускайте. <br> участвуйте.</p>
+    <div class="horiz_line_mob">
     </div>
     <ul class="header_name">
-        <li class="name"><a class="no_wrap" href="/">олимпиады.</a></li>
+        <li class="name_mob"><a class="no_wrap" href="/">олимпиады.</a></li>
         {% if user.is_authenticated %}
         <li class="register">
           <div id="registerr">
-            <a class="rgstr_wrap a_p" href="/autorization/profile">@{{ user.username }}</a>
             <a class="rgstr_wrap a_img" href="/autorization/profile"><h3>@</h3></a>
           </div>
         </li>
@@ -27,74 +26,69 @@
         {% else %}
           <li class="register">
             <div id="registerr">
-              <a class="rgstr_wrap a_p" href="/autorization/signin"><p>войти/зарегистрироваться</p></a>
-              <a class="rgstr_wrap a_img" href="/autorization/signin"><img class="register" src={% static "media/signin.svg" %} alt="target"></a>
+              <a class="rgstr_wrap" href="/autorization/signin"><img class="register" style="width: 70px; height: 70px; padding-bottom: 20px" src={% static "media/signin.svg" %} alt="target"></a>
             </div>
           </li>
         {% endif%}
     </ul>
-    <div class="horiz_line">
+    <div class="horiz_line_mob">
     </div>
   </div>
-  <div class="main">
-    <h1 class="topic_main font_big">{{ name }}</h1>
+  <div class="main_mob">
+    <h1 class="topic_main_mob font_big">{{ name }}</h1>
     <div class="vetical_table">
-      <div class="horiz_line" style="margin-bottom: 20px !important;">
+      <div class="horiz_line_mob">
       </div>
-
-      <span class="is_registered_true">
-        <p class="is_registered_true">Вы уже зарегистрированы на эту олимпиаду!</p>
-      </span>
 
       {% if description != "" %}
       <div class="description">
-        <p class="description_title">Об олимпиаде</p>
-        <div class="small_horiz_line">
+        <p class="description_title_mob">Об олимпиаде</p>
+        <div class="small_horiz_line_mob">
         </div>
-        <p class="description_text">
+        <p class="description_text_mob">
           {{ description }}
         </p>
       </div>
       {% endif %}
 
       <div class="description">
-        <p class="description_title">Информация</p>
-        <div class="small_horiz_line">
+        <p class="description_title_mob">Информация</p>
+        <div class="small_horiz_line_mob">
         </div>
         <div>
-          <div class="names">
-              <div class="item_align">
-                  <img class="data_img bookshelf" src={% static "media/bookshelf.svg" %} alt="subject">
-                  <p class="subject data_p">{{ subject }}</p>
+              <div class="item_align_mob">
+                  <img class="data_img bookshelf_mob" src={% static "media/bookshelf.svg" %} alt="subject">
+                  <p class="subject_mob data_p">{{ subject }}</p>
               </div>
-              <div class="item_align">
-                <img class="data_img deadline" style="padding-left:5px" src={% static "media/deadline.svg" %} alt="deadline">
-                <p class="date data_p" style="padding-left:10px">Регистрация заканчивается {{ register_end_date }}</p>
-              </div>
-              <div class="item_align">
-                <img class="data_img target" src={% static "media/support.svg" %} alt="support">
-                <p class="data_p" style="padding-left: 7px">По всем вопросам: {{ support_email }}</p>
-              </div>
-            </div>
 
-            <div class="other_data" style="padding-left: 80px">
-              <div class="item_align">
-                <img class="data_img target" src={% static "media/target.svg" %} alt="target">
+              <div class="item_align_mob">
+                <img class="data_img target_mob" src={% static "media/target.svg" %} alt="target">
                 {% if rank != "нет" %}
-                <p class="subject data_p" style="padding-left: 7px">{{ rank }} уровень, {{ grade }} класс</p>
+                <p class="subject_mob data_p" style="padding-left: 7px">{{ rank }} уровень, {{ grade }} класс</p>
                 {% else %}
-                <p class="subject data_p">Олимпиада не имеет уровня</p>
+                <p class="subject_mob data_p">Олимпиада не имеет уровня</p>
                 {% endif %}
               </div>
-              <div class="item_align">
-                <img class="data_img target" src={% static "media/calendar.svg" %} alt="calendar">
-                <p class="data_p" style="padding-left: 7px">{{ competition_date }}</p>
+
+              <div class="item_align_mob">
+                <img class="data_img deadline_mob" style="padding-left:5px" src={% static "media/deadline.svg" %} alt="deadline">
+                <p class="date_mob data_p" style="padding-left:16px">Регистрация заканчивается {{ register_end_date }}</p>
               </div>
-              <div class="item_align">
-                <img class="data_img location" src={% static "media/pin.svg" %} alt="location">
-                <p class="data_p" style="padding-left: 16px">{{ address }}</p>
+
+              <div class="item_align_mob">
+                <img class="data_img target_mob" src={% static "media/calendar.svg" %} alt="calendar">
+                <p class="data_p" style="padding-left: 4px; font-size: 30px">{{ competition_date }}</p>
               </div>
-            </div>
+
+              <div class="item_align_mob">
+                <img class="data_img location_mob" src={% static "media/pin.svg" %} alt="location">
+                <p class="data_p" style="padding-left: 16px; font-size: 30px">{{ address }}</p>
+              </div>
+
+              <div class="item_align_mob">
+                <img class="data_img target_mob" src={% static "media/support.svg" %} alt="support">
+                <p class="data_p" style="font-size: 30px">По всем вопросам: {{ support_email }}</p>
+              </div>
           </div>
         </div>
     </div>

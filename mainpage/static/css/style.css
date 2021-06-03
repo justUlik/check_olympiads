@@ -322,10 +322,14 @@ body {
   height: 100px;
 }
 
-.green_but_text {
+.green_but_text_mob {
   color: #F3F3F3;
   font-size: 35px;
   font-weight: 600;
+}
+
+.green_but_text {
+  color: #F3F3F3;
 }
 
 .no_wrap {
