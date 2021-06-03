@@ -30,10 +30,9 @@ def view_olympiads(request):
     olympiads = filter.qs
     if request.user.is_authenticated:
         res = []
-        registered_olympiads = registerOlympiad.objects.filter(usr=request.user)
         for olympiad in olympiads:
-            now = registerOlympiad.objects.filter(olympiad=olympiad)
-            if now is []:
+            now = registerOlympiad.objects.filter(olympiad=olympiad, usr=request.user)
+            if len(now) == 0:
                 res.append(olympiad)
         olympiads = res
     subjects = ['Математика', 'Русский язык', 'Литература', 'История', 'Физическая культура', 'Музыка', 'Технология', 'Химия', 'Биология', 'Физика', 'Экология', 'География', 'Естествознание', 'Астрономия', 'Окружающий мир', 'Изобразительное искусство', 'Основы безопасности жизнедеятельности', 'Информатика', 'Робототехника', 'Экономика']

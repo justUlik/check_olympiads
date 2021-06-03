@@ -49,8 +49,7 @@ def check_olympiad_info(request, olympiad_name):
                'rank': olympiad.rank,
                'support_email': olympiad.support_email,
                'address': olympiad.address,
-               'grade_beg': olympiad.grade_beg,
-               'grade_end': olympiad.grade_end,
+               'grade': olympiad.grade,
                'is_authenticated' : is_authenticated,
                'is_profile_good' : is_profile_good}
     if is_registered:

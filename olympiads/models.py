@@ -60,7 +60,6 @@ class Olympiad(models.Model):
     address = models.TextField(default=None)
     grade = models.TextField(choices=CHOICES_GRADES, default=None)
 
-
     def __str__(self):
         return str(self.name)
 
