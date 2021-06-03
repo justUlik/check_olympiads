@@ -432,7 +432,7 @@ select {
   margin-bottom: 10px;
 }
 
-select {
+.sub_filter {
   width: 140px !important;
   background: #F3F3F3;
   padding-left: 35px;
@@ -446,14 +446,34 @@ select {
   text-decoration: none;
 }
 
-select .opt {
+select {
+  width: 140px !important;
+  background: #F3F3F3;
+  padding-left: 35px;
+  text-align: -webkit-center;
+  border:none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -ms-appearance: none;
+  text-decoration: none;
+}
+
+select .opt_mob {
   width: 140px !important;
   padding-left: 25%;
   font-size: 30px;
   text-align: -webkit-center;
 }
 
-.green_but_filter {
+select .opt {
+  width: 140px !important;
+  padding-left: 25%;
+  font-size: 15px;
+  text-align: -webkit-center;
+}
+
+.green_but_filter_mob {
   background: #6DC2B6;
   color: #F3F3F3;
   font-size: 25px;
@@ -462,6 +482,16 @@ select .opt {
   border-style: none;
   width: 140px;
   height: 55px;
+}
+
+.green_but_filter {
+  background: #6DC2B6;
+  color: #F3F3F3;
+  font-size: 15px;
+  font-weight: 500;
+  box-sizing: border-box;
+  border-style: none;
+  width: 140px;
 }
 
 #box {

@@ -36,109 +36,161 @@
       </div>
     </div>
     <div class="main">
-          <p class="topic_main">профиль</p>
-          <div class="horiz_line">
-          </div>
-          <form method="post">
-              {% csrf_token %}
-              <div>
-                <div class="usr">
-                    <p class="usr_eml_plc">никнейм</p>
-                    <h1 class="usr_eml_data">{{ username }}</h1>
-                </div>
-                <div class="eml">
-                    <p class="usr_eml_plc">email</p>
-                    <h1 class="usr_eml_data">{{ email }}</h1>
-                </div>
-              </div>
-              <div style="padding-top: 40px;">
-                <div class="names">
-                  <div class="field">
-                    <p class="field_plc">имя</p>
-                    <input type="id_first_name" id="id_first_name" name="first_name" class="field_box" placeholder="{{ first_name }}"></input>
-                  </div>
-                  <div class="field">
-                    <p class="field_plc">отчество (при наличии)</p>
-                    <input type="id_father_name" id="id_father_name" name="father_name" class="field_box" placeholder="{{ father_name }}"></input>
-                  </div>
-                  <div class="field">
-                    <p class="field_plc">фамилия</p>
-                    <input type="id_second_name" id="id_second_name" name="second_name" class="field_box" placeholder="{{ second_name }}"></input>
-                  </div>
-                </div>
-                <div class="other_data">
-                  <div class="field">
-                    <p class="field_plc">дата рождения</p>
-                    {% if birth_date != None %}
-                      <input type="date" id="id_birth_date" name="birth_date" class="field_box" placeholder="{{ birth_date }}" min="1900-01-01" max="3000-12-31"></input>
-                    {% else %}
-                      <input type="date" id="id_birth_date" name="birth_date" class="field_box" placeholder="дд.мм.гггг"></input>
-                    {% endif %}
-                  </div>
-                  <div class="field">
-                    <p class="field_plc">класс</p>
-                    <input type="id_grade" id="id_grade" name="grade" class="field_box" placeholder="{{ grade }}"></input>
-                  </div>
-                  <div style="padding-top: 15px">
-                    <button class="changing_profile changing_profile_p" type="submit" name="button">изменить</button>
-                  </div>
-              </form>
+      <div class="topic">
+        <p class="topic_main" style="display: inline-table">профиль</p>
+        <img id="hid" src={% static "media/hidden.png" %} onclick="showhide_profile()" style="padding-left: 10px; padding-top: 5px; display: inline-table" alt="glass_hidden">
+        <img id="nonhid" src={% static "media/nonhidden.png" %} onclick="showhide_profile()" style="padding-left: 10px; padding-top: 5px; display: none; width: 40px; height: 35px" alt="glass_non_hidden">
+      </div>
+      <div id="profile">
+        <div class="horiz_line">
+        </div>
+        <form method="post">
+          {% csrf_token %}
+          <div>
+            <div class="usr">
+              <p class="usr_eml_plc">никнейм</p>
+              <h1 class="usr_eml_data">{{ username }}</h1>
+            </div>
+            <div class="eml">
+              <p class="usr_eml_plc">email</p>
+              <h1 class="usr_eml_data">{{ email }}</h1>
             </div>
           </div>
+          <div style="padding-top: 40px;">
+            <div class="names">
+              <div class="field">
+                <p class="field_plc">имя</p>
+                <input type="id_first_name" id="id_first_name" name="first_name" class="field_box" placeholder="{{ first_name }}"></input>
+              </div>
+              <div class="field">
+                <p class="field_plc">отчество (при наличии)</p>
+                <input type="id_father_name" id="id_father_name" name="father_name" class="field_box" placeholder="{{ father_name }}"></input>
+              </div>
+              <div class="field">
+                <p class="field_plc">фамилия</p>
+                <input type="id_second_name" id="id_second_name" name="second_name" class="field_box" placeholder="{{ second_name }}"></input>
+              </div>
+            </div>
+            <div class="other_data">
+              <div class="field">
+                <p class="field_plc">дата рождения</p>
+                {% if birth_date != None %}
+                <input type="date" id="id_birth_date" name="birth_date" class="field_box" placeholder="{{ birth_date }}" min="1900-01-01" max="3000-12-31"></input>
+                {% else %}
+                <input type="date" id="id_birth_date" name="birth_date" class="field_box" placeholder="дд.мм.гггг"></input>
+                {% endif %}
+              </div>
+              <div class="field">
+                <p class="field_plc">класс</p>
+                <input type="id_grade" id="id_grade" name="grade" class="field_box" placeholder="{{ grade }}"></input>
+              </div>
+              <div style="padding-top: 15px">
+                <button class="changing_profile changing_profile_p" type="submit" name="button">изменить</button>
+              </div>
+        </form>
+      </div>
+    </div>
+    </div>
 
-          <p class="topic_main">мои олимпиады</p>
-          {% if len != 0 %}
+    <script type="text/javascript">
+      var pos = 0;
+      function showhide_profile() {
+        if (pos == 0) {
+          document.getElementById("profile").style.display = "block";
+          document.getElementById("nonhid").style.display = "none";
+          document.getElementById("hid").style.display = "inline-table";
+          pos = 1;
+        } else {
+          document.getElementById("profile").style.display = "none";
+          document.getElementById("nonhid").style.display = "inline-table";
+          document.getElementById("hid").style.display = "none";
+          pos = 0;
+        }
+      }
+      $('#profile').slideToggle(200);
+    </script>
+
+    <div class="topic">
+      <p class="topic_main" style="display: inline-table">мои олимпиады</p>
+      <img id="hid_ol" src={% static "media/hidden.png" %} onclick="showhide_olympiads()" style="padding-left: 10px; padding-top: 5px; display: inline-table" alt="glass_hidden">
+      <img id="nonhid_ol" src={% static "media/nonhidden.png" %} onclick="showhide_olympiads()" style="padding-left: 10px; padding-top: 5px; display: none; width: 40px; height: 35px" alt="glass_non_hidden">
+    </div>
+    <div id="olympiads">
+        {% if len != 0 %}
           <div class="horiz_line"></div>
           <form method="get" class="form_filter">
             <div class="form_filter_obj">
-                <select id="subject" name="subject" style="padding-left: 25%;">
-                  <option class="opt" selected>предмет</option>
-                  {% for sub in subjects %}
-                    <option class="opt" value="{{ sub }}">{{ sub }}</option>
-                  {% endfor %}
-                </select>
+              <select id="subject" name="subject" style="padding-left: 25%;">
+                <option class="opt" selected>предмет</option>
+                {% for sub in subjects %}
+                <option class="opt" value="{{ sub }}">{{ sub }}</option>
+                {% endfor %}
+              </select>
             </div>
             <div class="form_filter_obj">
-                <select id="rank" name="rank" style="padding-left: 27%;">
-                  <option class="opt" selected>уровень</option>
-                  {% for rank in ranks %}
-                    <option class="opt" value="{{ rank }}">{{ rank }}</option>
-                  {% endfor %}
-                </select>
+              <select id="rank" name="rank" style="padding-left: 27%;">
+                <option class="opt" selected>уровень</option>
+                {% for rank in ranks %}
+                <option class="opt" value="{{ rank }}">{{ rank }}</option>
+                {% endfor %}
+              </select>
             </div>
             <div class="form_filter_obj">
-                <select id="grade" name="grade" style="padding-left: 33%;">
-                  <option class="opt" selected>класс</option>
-                  {% for grade in grades %}
-                    <option class="opt" value="{{ grade }}">{{ grade }}</option>
-                  {% endfor %}
-                </select>
+              <select id="grade" name="grade" style="padding-left: 33%;">
+                <option class="opt" selected>класс</option>
+                {% for grade in grades %}
+                <option class="opt" value="{{ grade }}">{{ grade }}</option>
+                {% endfor %}
+              </select>
             </div>
             <button type="submit" name="button" class="green_but_filter">поиск</button>
           </form>
-          {% endif %}
-          {% if len == 0 %}
-          <div class="horiz_line" style="margin-bottom: 20px;"></div>
-            <div class="content_table">
-              <p class="name_olympiad" style="padding: 20px">Пока Вы не зарегистрировались ни на одну олимпиаду :(</p>
-            </div>
-          {% endif %}
-          <div class="vetical_table">
-              {% for olympiad in data_olympiads %}
-                <div class="content_table" onclick="location.href='/olympiad/{{ olympiad.name }}';">
-                  <div class="data">
-                    <p class="subject">{{ olympiad.subject }}</p>
-                    <p class="name_olympiad"></a>{{ olympiad.name }}</p>
-                    <p class="date"> Дата проведения: {{ olympiad.competition_date }}</p>
-                    {% if i.4 != "н" %}
-                      <p class="rank">{{ olympiad.rank }} уровень</p>
-                    {% else %}
-                      <p class="rank">Олимпиада не имеет уровня</p>
-                    {% endif %}
-                  </div>
-                </div>
-              {% endfor %}
+
+        {% else %}
+
+          <div class="horiz_line" style="margin-bottom: 20px;">
           </div>
+
+          <div class="content_table">
+            <p class="name_olympiad" style="padding: 20px">Пока Вы не зарегистрировались ни на одну олимпиаду :(</p>
+          </div>
+        {% endif %}
+        <div class="vetical_table">
+          {% for olympiad in data_olympiads %}
+            <div class="content_table" onclick="location.href='/olympiad/{{ olympiad.name }}';">
+              <div class="data">
+                <p class="subject">{{ olympiad.subject }}</p>
+                <p class="name_olympiad"></a>{{ olympiad.name }}</p>
+                <p class="date"> Дата проведения: {{ olympiad.competition_date }}</p>
+                {% if i.4 != "н" %}
+                <p class="rank">{{ olympiad.rank }} уровень</p>
+                {% else %}
+                <p class="rank">Олимпиада не имеет уровня</p>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
     </div>
-  </body>
+  </div>
+    </div>
+  <script type="text/javascript">
+    var pos = 0;
+    function showhide_olympiads() {
+      if (pos == 0) {
+        document.getElementById("olympiads").style.display = "block";
+        document.getElementById("nonhid_ol").style.display = "none";
+        document.getElementById("hid_ol").style.display = "inline-table";
+        pos = 1;
+      } else {
+        document.getElementById("olympiads").style.display = "none";
+        document.getElementById("nonhid_ol").style.display = "inline-table";
+        document.getElementById("hid_ol").style.display = "none";
+        pos = 0;
+      }
+    }
+    $('#olympiads').slideToggle(200);
+  </script>
+</body>
+
 </html>

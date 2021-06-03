@@ -41,30 +41,30 @@
           {% if len != 0 %}
             <form method="get" class="form_filter">
               <div class="form_filter_obj_mob">
-                  <select id="subject" name="subject" style="padding: 5%; padding-left: 15% !important;">
-                    <option class="opt" selected>предмет</option>
+                  <select class="sub_filter" id="subject" name="subject" style="padding: 5%; padding-left: 15% !important;">
+                    <option class="opt_mob" selected>предмет</option>
                     {% for sub in subjects %}
-                      <option class="opt" value="{{ sub }}">{{ sub }}</option>
+                      <option class="opt_mob" value="{{ sub }}">{{ sub }}</option>
                     {% endfor %}
                   </select>
               </div>
               <div class="form_filter_obj_mob">
-                  <select id="rank" name="rank" style="padding: 5%; padding-left: 17% !important;">
-                    <option class="opt" selected>уровень</option>
+                  <select class="sub_filter" id="rank" name="rank" style="padding: 5%; padding-left: 17% !important;">
+                    <option class="opt_mob" selected>уровень</option>
                     {% for rank in ranks %}
-                      <option class="opt" value="{{ rank }}">{{ rank }}</option>
+                      <option class="opt_mob" value="{{ rank }}">{{ rank }}</option>
                     {% endfor %}
                   </select>
               </div>
               <div class="form_filter_obj_mob">
-                  <select id="grade" name="grade" style="padding: 5%; padding-left: 25% !important;">
-                    <option class="opt" selected>класс</option>
+                  <select class="sub_filter" id="grade" name="grade" style="padding: 5%; padding-left: 25% !important;">
+                    <option class="opt_mob" selected>класс</option>
                     {% for grade in grades %}
-                      <option class="opt" value="{{ grade }}">{{ grade }}</option>
+                      <option class="opt_mob" value="{{ grade }}">{{ grade }}</option>
                     {% endfor %}
                   </select>
               </div>
-              <button type="submit" name="button" class="green_but_filter">поиск</button>
+              <button type="submit" name="button" class="green_but_filter_mob">поиск</button>
             </form>
           {% endif %}
           <div class="vetical_table">
