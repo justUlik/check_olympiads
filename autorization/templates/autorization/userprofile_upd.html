@@ -32,9 +32,9 @@
       <img id="hid" src={% static "media/hidden.png" %} onclick="showhide_profile()" style="padding-left: 10px; padding-top: 5px; display: inline-table" alt="glass_hidden">
       <img id="nonhid" src={% static "media/nonhidden.png" %} onclick="showhide_profile()" style="padding-left: 10px; padding-top: 5px; display: none; width: 40px; height: 35px" alt="glass_non_hidden">
     </div>
-    <div class="horiz_line">
-    </div>
     <div id="profile">
+      <div class="horiz_line">
+      </div>
       <form method="post">
         {% csrf_token %}
         <div>
@@ -106,61 +106,64 @@
     <img id="hid_ol" src={% static "media/hidden.png" %} onclick="showhide_olympiads()" style="padding-left: 10px; padding-top: 5px; display: inline-table" alt="glass_hidden">
     <img id="nonhid_ol" src={% static "media/nonhidden.png" %} onclick="showhide_olympiads()" style="padding-left: 10px; padding-top: 5px; display: none; width: 40px; height: 35px" alt="glass_non_hidden">
   </div>
-  <div class="olympiads">
-    {% if len != 0 %}
-    <div class="horiz_line"></div>
-    <form method="get" class="form_filter">
-      <div class="form_filter_obj">
-        <select id="subject" name="subject" style="padding-left: 25%;">
-          <option class="opt" selected>предмет</option>
-          {% for sub in subjects %}
-          <option class="opt" value="{{ sub }}">{{ sub }}</option>
-          {% endfor %}
-        </select>
-      </div>
-      <div class="form_filter_obj">
-        <select id="rank" name="rank" style="padding-left: 27%;">
-          <option class="opt" selected>уровень</option>
-          {% for rank in ranks %}
-          <option class="opt" value="{{ rank }}">{{ rank }}</option>
-          {% endfor %}
-        </select>
-      </div>
-      <div class="form_filter_obj">
-        <select id="grade" name="grade" style="padding-left: 33%;">
-          <option class="opt" selected>класс</option>
-          {% for grade in grades %}
-          <option class="opt" value="{{ grade }}">{{ grade }}</option>
-          {% endfor %}
-        </select>
-      </div>
-      <button type="submit" name="button" class="green_but_filter">поиск</button>
-    </form>
-    {% endif %}
-    {% if len == 0 %}
-    <div class="horiz_line" style="margin-bottom: 20px;"></div>
-    <div class="content_table">
-      <p class="name_olympiad" style="padding: 20px">Пока Вы не зарегистрировались ни на одну олимпиаду :(</p>
-    </div>
-    {% endif %}
-    <div class="vetical_table">
-      {% for olympiad in data_olympiads %}
-      <div class="content_table" onclick="location.href='/olympiad/{{ olympiad.name }}';">
-        <div class="data">
-          <p class="subject">{{ olympiad.subject }}</p>
-          <p class="name_olympiad"></a>{{ olympiad.name }}</p>
-          <p class="date"> Дата проведения: {{ olympiad.competition_date }}</p>
-          {% if i.4 != "н" %}
-          <p class="rank">{{ olympiad.rank }} уровень</p>
-          {% else %}
-          <p class="rank">Олимпиада не имеет уровня</p>
-          {% endif %}
+  <div id="olympiads">
+      {% if len != 0 %}
+        <div class="horiz_line"></div>
+        <form method="get" class="form_filter">
+          <div class="form_filter_obj">
+            <select id="subject" name="subject" style="padding-left: 25%;">
+              <option class="opt" selected>предмет</option>
+              {% for sub in subjects %}
+              <option class="opt" value="{{ sub }}">{{ sub }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form_filter_obj">
+            <select id="rank" name="rank" style="padding-left: 27%;">
+              <option class="opt" selected>уровень</option>
+              {% for rank in ranks %}
+              <option class="opt" value="{{ rank }}">{{ rank }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form_filter_obj">
+            <select id="grade" name="grade" style="padding-left: 33%;">
+              <option class="opt" selected>класс</option>
+              {% for grade in grades %}
+              <option class="opt" value="{{ grade }}">{{ grade }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <button type="submit" name="button" class="green_but_filter">поиск</button>
+        </form>
+
+      {% else %}
+
+        <div class="horiz_line" style="margin-bottom: 20px;">
         </div>
+
+        <div class="content_table">
+          <p class="name_olympiad" style="padding: 20px">Пока Вы не зарегистрировались ни на одну олимпиаду :(</p>
+        </div>
+      {% endif %}
+      <div class="vetical_table">
+        {% for olympiad in data_olympiads %}
+          <div class="content_table" onclick="location.href='/olympiad/{{ olympiad.name }}';">
+            <div class="data">
+              <p class="subject">{{ olympiad.subject }}</p>
+              <p class="name_olympiad"></a>{{ olympiad.name }}</p>
+              <p class="date"> Дата проведения: {{ olympiad.competition_date }}</p>
+              {% if i.4 != "н" %}
+              <p class="rank">{{ olympiad.rank }} уровень</p>
+              {% else %}
+              <p class="rank">Олимпиада не имеет уровня</p>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
       </div>
-      {% endfor %}
-    </div>
   </div>
-  </div>
+</div>
   <script type="text/javascript">
     var pos = 0;
     function showhide_olympiads() {
